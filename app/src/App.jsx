@@ -1,4 +1,4 @@
-import {  useReducer } from "react";
+import { useReducer } from "react";
 import Card from "./components/Card";
 import "./App.css";
 
@@ -40,12 +40,14 @@ function App() {
   }
 
   return (
-    <>
+    <div className="total-div">
       <div className="container">
-        <h1>My todo</h1>
+        <h2>My todo</h2>
         <Card addTodo={(blockquotes) => handleAdd(blockquotes)} todos={todos} />
       </div>
-    </>
+      <div><h2>progress</h2></div>
+      <div><h2>Done</h2></div>
+    </div>
   );
 }
 

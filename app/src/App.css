@@ -7,3 +7,8 @@ blockquote {
   background: #eee;
   border-radius: 5px;
 }
+.total-div{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  
+}

@@ -10,5 +10,9 @@ blockquote {
 .total-div{
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  
+
+}
+.container,.progess ,.done{
+  border: 1px solid black;
+  height: 100vh;
 }

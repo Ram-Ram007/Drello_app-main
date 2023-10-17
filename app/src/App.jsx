@@ -45,8 +45,8 @@ function App() {
         <h2>My todo</h2>
         <Card addTodo={(blockquotes) => handleAdd(blockquotes)} todos={todos} />
       </div>
-      <div><h2>progress</h2></div>
-      <div><h2>Done</h2></div>
+      <div className="progess"><h2>progress</h2></div>
+      <div className="done"><h2>Done</h2></div>
     </div>
   );
 }

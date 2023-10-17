@@ -1,57 +1,58 @@
-import { useEffect, useReducer } from "react";
-import Card from "./components/card";
+import React, { useReducer, useState } from "react";
+import Card from "./components/Card"; // Import the Card component
 import "./App.css";
 
 function App() {
-  const [todos, dispatch] = useReducer(todoReducer, []);
+  const [cards, dispatch] = useReducer(cardReducer, []);
+  const [newCardTitle, setNewCardTitle] = useState("");
+  
 
-  function todoReducer(todos, action) {
+  function cardReducer(state, action) {
     switch (action.type) {
-      case "TODO_ADD": {
+      case "ADD_CARD":
         return [
-          ...todos,
+          ...state,
           {
-            id: new Date().getTime(),
-            text: action.value,
-            isDone: false,
-            isEdit: false,
+            id: Date.now(),
+            title: action.value.title,
+            
           },
         ];
-      }
-      case "TODO_DELETE": {
-        const filtered = todos.filter((t) => t.id != action.value);
-        return [...filtered];
-      }
-      default: {
-        throw Error("Unknown action: " + action.type);
-      }
+      default:
+        return state;
     }
   }
 
-  function handleAdd(value) {
-    dispatch({
-      type: "TODO_ADD",
-      value: value,
-    });
-  }
-  function handleDelete(id) {
-    dispatch({
-      type: "TODO_DELETE",
-      value: id,
-    });
-  }
+  const addCard = () => {
+    if (newCardTitle) {
+      dispatch({
+        type: "ADD_CARD",
+        value: { title: newCardTitle},
+      });
+      setNewCardTitle("");
+      
+    }
+  };
 
   return (
-    <>
-        <h1>My todo</h1>
-      <div className="total-div">
-        <div>
-          <Card />
-        </div>
-        <div>Progess</div>
-        <div>Done</div>
+    <div className="App">
+      <h1>Card Creator App</h1>
+      <div className="add-card">
+        <textarea
+          type="text"
+          placeholder="Enter card title"
+          value={newCardTitle}
+          onChange={(e) => setNewCardTitle(e.target.value)}
+        />
+        
+        <button onClick={addCard}>+</button>
       </div>
-    </>
+      <div className="cards">
+        {cards.map((card) => (
+          <Card key={card.id} title={card.title} />
+        ))}
+      </div>
+    </div>
   );
 }
 

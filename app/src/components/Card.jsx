@@ -3,13 +3,14 @@ import React, { useState } from "react";
 function Card({ addTodo, todos }) {
   const [blockquotes, setBlockquotes] = useState("");
 
-  const addCard = () => {
-    setBlockquotes("");
-    addTodo(blockquotes);
-  };
+    const addCard = () => {
+      setBlockquotes("");
+      addTodo(blockquotes);
+    };
 
   function handleBlockquoteChange(newValue) {
     setBlockquotes(newValue);
+    setBlockquotes("");
     console.log(newValue);
   }
 
@@ -19,6 +20,7 @@ function Card({ addTodo, todos }) {
       <div className="card">
         {todos.map((todo, index) => (
           <div key={todo.id}>
+            
             <blockquote
               key={todo.id}
               contentEditable={true}

@@ -1,58 +1,51 @@
-import React, { useReducer, useState } from "react";
-import Card from "./components/Card"; // Import the Card component
+import {  useReducer } from "react";
+import Card from "./components/Card";
 import "./App.css";
 
 function App() {
-  const [cards, dispatch] = useReducer(cardReducer, []);
-  const [newCardTitle, setNewCardTitle] = useState("");
-  
+  const [todos, dispatch] = useReducer(todoReducer, []);
 
-  function cardReducer(state, action) {
+  function todoReducer(todos, action) {
     switch (action.type) {
-      case "ADD_CARD":
+      case "TODO_ADD": {
         return [
-          ...state,
+          ...todos,
           {
-            id: Date.now(),
-            title: action.value.title,
-            
+            id: new Date().getTime(),
+            text: action.value,
           },
         ];
-      default:
-        return state;
+      }
+      case "TODO_DELETE": {
+        const filtered = todos.filter((t) => t.id != action.value);
+        return [...filtered];
+      }
+      default: {
+        throw Error("Unknown action: " + action.type);
+      }
     }
   }
 
-  const addCard = () => {
-    if (newCardTitle) {
-      dispatch({
-        type: "ADD_CARD",
-        value: { title: newCardTitle},
-      });
-      setNewCardTitle("");
-      
-    }
-  };
+  function handleAdd(value) {
+    dispatch({
+      type: "TODO_ADD",
+      value: value,
+    });
+  }
+  function handleDelete(id) {
+    dispatch({
+      type: "TODO_DELETE",
+      value: id,
+    });
+  }
 
   return (
-    <div className="App">
-      <h1>Card Creator App</h1>
-      <div className="add-card">
-        <textarea
-          type="text"
-          placeholder="Enter card title"
-          value={newCardTitle}
-          onChange={(e) => setNewCardTitle(e.target.value)}
-        />
-        
-        <button onClick={addCard}>+</button>
+    <>
+      <div className="container">
+        <h1>My todo</h1>
+        <Card addTodo={(blockquotes) => handleAdd(blockquotes)} todos={todos} />
       </div>
-      <div className="cards">
-        {cards.map((card) => (
-          <Card key={card.id} title={card.title} />
-        ))}
-      </div>
-    </div>
+    </>
   );
 }
 

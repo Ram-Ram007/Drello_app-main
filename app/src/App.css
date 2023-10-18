@@ -29,6 +29,11 @@ blockquote {
 .total-card{
   
   background-color: #f9f9f9;
+  border-radius: 10px;
+  margin: 10px;
+
+  
+
 }
 .textarea{
   width: 98%;
@@ -57,4 +62,10 @@ blockquote {
 .button{
   background-color: red;
   color: white;
+}
+.add{
+  color: white;
+  background-color: green;
+  margin-left: 12px;
+  border: 1px solid black;
 }

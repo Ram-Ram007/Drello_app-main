@@ -12,10 +12,10 @@ function Card({ addTodo, edited, tasks, deleteCard }) {
 
   return (
     <>
-      <button onClick={addCard}>+</button>
-      <div className="total-card">
+      <button onClick={addCard} className="add">+</button>
+      <div >
         {tasks.map((todo, id) => (
-          <div key={todo.id} draggable>
+          <div key={todo.id} draggable className="total-card">
             <div className="button-div">
             <button onClick={() => deleteCard(todo.id)} className="button" >X</button>
             </div>

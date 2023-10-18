@@ -15,10 +15,9 @@ function Card({ addTodo, edited, tasks, deleteCard }) {
       <button onClick={addCard}>+</button>
       <div className="">
         {tasks.map((todo, id) => (
-          <div key={id} draggable>
+          <div key={todo.id} draggable>
             <textarea
-              key={id}
-              value={tasks.text}
+              value={text.id}
               onChange={(e) => handleBlockquoteChange(e.target.value)}
               onBlur={(e) => edited(e.target.value, todo.id)}
               placeholder="enter"

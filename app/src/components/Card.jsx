@@ -13,17 +13,20 @@ function Card({ addTodo, edited, tasks, deleteCard }) {
   return (
     <>
       <button onClick={addCard}>+</button>
-      <div className="">
+      <div className="total-card">
         {tasks.map((todo, id) => (
           <div key={todo.id} draggable>
+            <div className="button-div">
+            <button onClick={() => deleteCard(todo.id)} className="button" >X</button>
+            </div>
             <textarea
+            className="textarea"
               value={text.id}
               onChange={(e) => handleBlockquoteChange(e.target.value)}
               onBlur={(e) => edited(e.target.value, todo.id)}
               placeholder="enter"
             />
-            <div>{formatDate(todo.dateTime)}</div>
-            <button onClick={() => deleteCard(todo.id)}>Delete</button>
+            <div className="time">{formatDate(todo.dateTime)}</div>
           </div>
         ))}
       </div>

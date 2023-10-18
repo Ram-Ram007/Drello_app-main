@@ -83,7 +83,7 @@ function App() {
         />
       </div>
       <div className="progess">
-        <h2>progress</h2>
+        <h2>Progress</h2>
       </div>
       <div className="done">
         <h2>Done</h2>

@@ -15,6 +15,7 @@ function Card({ addTodo, edited, tasks, deleteCard }) {
       <button onClick={addCard} className="add">+</button>
       <div >
         {tasks.map((todo, id) => (
+          
           <div key={todo.id} draggable className="total-card">
             <div className="button-div">
             <button onClick={() => deleteCard(todo.id)} className="button" >X</button>

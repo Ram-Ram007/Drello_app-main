@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-// import { formatDate } from "../utils";
+import { formatDate } from "../utils";
 function Card({ addTodo, edited, tasks }) {
   const [text, setText] = useState("");
 
@@ -22,7 +22,7 @@ function Card({ addTodo, edited, tasks }) {
               onBlur={(e) => edited(e.target.value, todo.id)}
               placeholder="enter"
             />
-            {/* <div>{formatDate(todo.dateTime)}</div> */}
+            <div>{formatDate(todo.dateTime)}</div>
           </div>
         ))}
       </div>

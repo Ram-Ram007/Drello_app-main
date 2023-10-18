@@ -21,6 +21,8 @@ blockquote {
 .done {
   border: 1px solid white;
   height: 100vh;
+  text-align: center;
+
 }
 
 .time{
@@ -68,4 +70,6 @@ blockquote {
   background-color: green;
   margin-left: 12px;
   border: 1px solid black;
+  display: flex;
+  justify-content: baseline;
 }

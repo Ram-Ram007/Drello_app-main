@@ -1,34 +1,28 @@
 import React, { useState } from "react";
+// import { formatDate } from "../utils";
+function Card({ addTodo, edited, tasks }) {
+  const [text, setText] = useState("");
 
-function Card({ addTodo, todos }) {
-  const [blockquotes, setBlockquotes] = useState("");
-
-    const addCard = () => {
-      setBlockquotes("");
-      addTodo(blockquotes);
-    };
-
+  const addCard = () => {
+    addTodo(text);
+  };
   function handleBlockquoteChange(newValue) {
-    setBlockquotes(newValue);
-    setBlockquotes("");
-    console.log(newValue);
+    setText(newValue);
   }
 
   return (
     <>
       <button onClick={addCard}>+</button>
-      <div className="card">
-        {todos.map((todo, index) => (
-          <div key={todo.id}>
-            
-            <blockquote
-              key={todo.id}
-              contentEditable={true}
-              suppressContentEditableWarning={true}
-              onInput={(e) => handleBlockquoteChange(e.target.innerHTML)}
-            >
-              {todo.text}
-            </blockquote>
+      <div className="">
+        {tasks.map((todo, id) => (
+          <div key={id} draggable>
+            <textarea
+              key={id}
+              onChange={(e) => handleBlockquoteChange(e.target.value)}
+              onBlur={(e) => edited(e.target.value, todo.id)}
+              placeholder="enter"
+            />
+            {/* <div>{formatDate(todo.dateTime)}</div> */}
           </div>
         ))}
       </div>

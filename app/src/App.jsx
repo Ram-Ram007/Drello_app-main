@@ -1,24 +1,39 @@
-import { useReducer } from "react";
+import { useReducer, useEffect } from "react";
 import Card from "./components/Card";
+import { v4 as uuidv4 } from "uuid";
 import "./App.css";
 
-function App() {
-  const [todos, dispatch] = useReducer(todoReducer, []);
+function getFromLocalStorage() {
+  return JSON.parse(localStorage.getItem("My-card")) || [];
+}
 
-  function todoReducer(todos, action) {
+function App() {
+  const [tasks, dispatch] = useReducer(todoReducer, getFromLocalStorage());
+
+  useEffect(() => {
+    localStorage.setItem("My-card", JSON.stringify(tasks));
+  }, [tasks]);
+
+  function todoReducer(tasks, action) {
     switch (action.type) {
       case "TODO_ADD": {
         return [
-          ...todos,
+          ...tasks,
           {
-            id: new Date().getTime(),
-            text: action.value,
+            id: uuidv4(),
+            text: "",
+            dateTime: new Date(),
+            inState: "todo",
           },
         ];
       }
-      case "TODO_DELETE": {
-        const filtered = todos.filter((t) => t.id != action.value);
-        return [...filtered];
+      case "TODO_EDITED": {
+        const editedTask = [...tasks];
+        const idx = editedTask.findIndex((nt) => nt.id === action.value.id);
+        if (idx !== -1) {
+          editedTask[idx]["text"] = action.value.value;
+        }
+        return editedTask;
       }
       default: {
         throw Error("Unknown action: " + action.type);
@@ -26,16 +41,20 @@ function App() {
     }
   }
 
+  useEffect(() => {
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+  }, [tasks]);
+
   function handleAdd(value) {
     dispatch({
       type: "TODO_ADD",
       value: value,
     });
   }
-  function handleDelete(id) {
+  function handleEdited(value, id) {
     dispatch({
-      type: "TODO_DELETE",
-      value: id,
+      type: "TODO_EDITED",
+      value: { value, id },
     });
   }
 
@@ -43,10 +62,18 @@ function App() {
     <div className="total-div">
       <div className="container">
         <h2>My todo</h2>
-        <Card addTodo={(blockquotes) => handleAdd(blockquotes)} todos={todos} />
+        <Card
+          addTodo={(text) => handleAdd(text)}
+          tasks={tasks}
+          edited={handleEdited}
+        />
       </div>
-      <div className="progess"><h2>progress</h2></div>
-      <div className="done"><h2>Done</h2></div>
+      <div className="progess">
+        <h2>progress</h2>
+      </div>
+      <div className="done">
+        <h2>Done</h2>
+      </div>
     </div>
   );
 }

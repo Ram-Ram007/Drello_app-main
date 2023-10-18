@@ -3,16 +3,16 @@ import Card from "./components/Card";
 import { v4 as uuidv4 } from "uuid";
 import "./App.css";
 
-function getFromLocalStorage() {
-  return JSON.parse(localStorage.getItem("My-card")) || [];
-}
+// function getFromLocalStorage() {
+//   return JSON.parse(localStorage.getItem("My-card")) || [];
+// }
 
 function App() {
-  const [tasks, dispatch] = useReducer(todoReducer, getFromLocalStorage());
+  const [tasks, dispatch] = useReducer(todoReducer, []);
 
-  useEffect(() => {
-    localStorage.setItem("My-card", JSON.stringify(tasks));
-  }, [tasks]);
+  // useEffect(() => {
+  //   localStorage.setItem("My-card", JSON.stringify(tasks));
+  // }, [tasks]);
 
   function todoReducer(tasks, action) {
     switch (action.type) {
@@ -35,6 +35,12 @@ function App() {
         }
         return editedTask;
       }
+
+      case "TODO_DELETE": {
+        // Use filter to remove the task with the specified id
+        return tasks.filter((task) => task.id !== action.id);
+      }
+
       default: {
         throw Error("Unknown action: " + action.type);
       }
@@ -58,6 +64,13 @@ function App() {
     });
   }
 
+  function handleDelete(id) {
+    dispatch({
+      type: "TODO_DELETE",
+      id: id,
+    });
+  }
+
   return (
     <div className="total-div">
       <div className="container">
@@ -66,6 +79,7 @@ function App() {
           addTodo={(text) => handleAdd(text)}
           tasks={tasks}
           edited={handleEdited}
+          deleteCard={handleDelete}
         />
       </div>
       <div className="progess">

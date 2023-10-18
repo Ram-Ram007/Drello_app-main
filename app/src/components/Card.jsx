@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-// import { formatDate } from "../utils";
-function Card({ addTodo, edited, tasks }) {
+import { formatDate } from "../utils";
+function Card({ addTodo, edited, tasks, deleteCard }) {
   const [text, setText] = useState("");
 
   const addCard = () => {
@@ -18,11 +18,13 @@ function Card({ addTodo, edited, tasks }) {
           <div key={id} draggable>
             <textarea
               key={id}
+              value={tasks.text}
               onChange={(e) => handleBlockquoteChange(e.target.value)}
               onBlur={(e) => edited(e.target.value, todo.id)}
               placeholder="enter"
             />
-            {/* <div>{formatDate(todo.dateTime)}</div> */}
+            <div>{formatDate(todo.dateTime)}</div>
+            <button onClick={() => deleteCard(todo.id)}>Delete</button>
           </div>
         ))}
       </div>

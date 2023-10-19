@@ -52,7 +52,8 @@ blockquote {
   display: flex;
   justify-content: end;
 }
-
+.button {
+}
 .add {
   color: white;
   background-color: #08cf65;

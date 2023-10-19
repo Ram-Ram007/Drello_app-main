@@ -48,4 +48,3 @@ function Done({ edited, tasks, deleteCard }) {
 }
 
 export default Done;
-    

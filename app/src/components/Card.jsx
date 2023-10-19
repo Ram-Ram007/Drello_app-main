@@ -21,7 +21,7 @@ function Card({ addTodo, edited, tasks, deleteCard }) {
             <button onClick={() => deleteCard(todo.id)} className="button" >X</button>
             </div>
             <textarea
-            className="textarea"
+            className="textarea"nom
               value={text.id}
               onChange={(e) => handleBlockquoteChange(e.target.value)}
               onBlur={(e) => edited(e.target.value, todo.id)}

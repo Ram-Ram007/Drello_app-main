@@ -1,7 +1,7 @@
 body {
   background-color: rgb(45, 151, 232);
   color: white;
-  font-family:Arial, Helvetica, sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
 }
 blockquote {
   margin: 0;
@@ -22,22 +22,17 @@ blockquote {
   border: 1px solid white;
   height: 100vh;
   text-align: center;
-
 }
 
-.time{
+.time {
   color: black;
 }
-.total-card{
-  
+.total-card {
   background-color: #f9f9f9;
   border-radius: 10px;
   margin: 10px;
-
-  
-
 }
-.textarea{
+.textarea {
   width: 98%;
   height: 100px;
   border: 1px solid #ccc;
@@ -48,9 +43,7 @@ blockquote {
   border: none;
   outline: none;
 }
-.button-div{
-
-  
+.button-div {
   border: none;
   border-radius: 4px;
   padding: 4px 8px;
@@ -58,16 +51,11 @@ blockquote {
   cursor: pointer;
   display: flex;
   justify-content: end;
-
-
 }
-.button{
-  background-color: red;
+
+.add {
   color: white;
-}
-.add{
-  color: white;
-  background-color: green;
+  background-color: #08cf65;
   margin-left: 12px;
   border: 1px solid black;
   display: flex;
